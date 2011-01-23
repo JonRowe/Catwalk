@@ -1,0 +1,17 @@
+begin
+  require 'autotest/fsevent'
+rescue LoadError
+end
+
+Autotest.add_hook :initialize do |at|
+
+  at.add_exception /^(?:\.\/)?\.git/
+  at.add_exception /^(?:\.\/)?\.bundle/
+  at.add_exception /^(?:\.\/)?tmp/
+
+  at.add_mapping(/^.autotest$/,true) { |_,_|
+    Dir["spec/**/*_spec.rb"]
+  }
+
+  nil
+end
