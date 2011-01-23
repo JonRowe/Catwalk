@@ -8,9 +8,13 @@ module Catwalk
       @model = model
     end
 
-    def to_model
-      @model
-    end
+    define_method(:to_model)   { @model }
+    define_method(:to_param)   { @model.to_param if persisted? }
+    define_method(:to_key)     { @model.to_key   if persisted? }
+    define_method(:persisted?) { @model.persisted? }
+    define_method(:valid?)     { @model.valid? }
+    define_method(:model_name) { @model.model_name }
+    define_method(:errors)     { @model.errors }
 
     module ClassMethods
 
