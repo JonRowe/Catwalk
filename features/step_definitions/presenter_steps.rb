@@ -22,6 +22,12 @@ When /^I define a field "([^"]*)"$/ do |field_name|
   end
 end
 
+When /^I set access_as to "([^"]*)"$/ do |accessor|
+  @presenter.class.class_eval do
+    access_as accessor
+  end
+end
+
 Then "my presenter should expose the models ActiveModel functionality" do
   @presenter.to_key.should == @model.to_key
   @presenter.to_param.should == @model.to_param
@@ -33,4 +39,8 @@ end
 
 Then /^my presenter should present "([^"]*)" from my model$/ do |field_name|
   @presenter.send(field_name).should == @model.send(field_name)
+end
+
+Then /^my presenter should expose the model via "([^"]*)"$/ do |field_name|
+  @presenter.send(field_name).should == @model
 end
