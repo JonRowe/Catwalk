@@ -27,7 +27,6 @@ Then "my presenter should expose the models ActiveModel functionality" do
   @presenter.to_param.should == @model.to_param
   @presenter.valid?.should == @model.valid?
   @presenter.persisted?.should == @model.persisted?
-  @presenter.model_name.should == @model.model_name
   @presenter.errors.should == @model.errors
   @presenter.to_model.should == @model
 end
