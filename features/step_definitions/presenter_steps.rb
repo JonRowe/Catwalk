@@ -16,12 +16,6 @@ When "I setup my presenter to represent my model" do
   @presenter = @presenter_klass.new(@model)
 end
 
-When /^I define a field "([^"]*)"$/ do |field_name|
-  @presenter.class.class_eval do
-    field field_name
-  end
-end
-
 When /^I set access_as to "([^"]*)"$/ do |accessor|
   @presenter.class.class_eval do
     access_as accessor
@@ -35,10 +29,6 @@ Then "my presenter should expose the models ActiveModel functionality" do
   @presenter.persisted?.should == @model.persisted?
   @presenter.errors.should == @model.errors
   @presenter.to_model.should == @model
-end
-
-Then /^my presenter should present "([^"]*)" from my model$/ do |field_name|
-  @presenter.send(field_name).should == @model.send(field_name)
 end
 
 Then /^my presenter should expose the model via "([^"]*)"$/ do |field_name|
