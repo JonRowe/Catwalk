@@ -24,6 +24,12 @@ module Catwalk
         end
       end
 
+      def access_as(accessor)
+        define_method accessor do
+          @model
+        end
+      end
+
     end
   end
 end

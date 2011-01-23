@@ -39,6 +39,17 @@ module Catwalk
       its(:to_model) { should == model }
     end
 
+    describe "access_as" do
+      subject do
+        klass.class_eval do
+          access_as :model_accessor
+        end
+        presenter
+      end
+
+      its(:model_accessor) { should == model }
+    end
+
     describe "field" do
       let(:model_value) { "a value" }
 
