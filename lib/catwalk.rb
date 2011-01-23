@@ -1,3 +1,1 @@
-module Catwalk
-  # Your code goes here...
-end
+require 'catwalk/presenter'
