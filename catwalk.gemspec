@@ -22,4 +22,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ruby-debug19'
   s.add_development_dependency 'autotest-standalone'
   s.add_development_dependency 'autotest-fsevent' if RUBY_PLATFORM =~ /darwin/
+
+  s.add_development_dependency 'activemodel'
 end
