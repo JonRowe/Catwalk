@@ -13,7 +13,13 @@ Gem::Specification.new do |s|
   s.description = %q{Catwalk is a gem for showing off models. It allows you to seperate presentation logic from data models.}
 
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {.autotest,spec,features}/*`.split("\n")
+  s.test_files    = `git ls-files -- {spec,features}/* .autotest`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'cucumber'
+  s.add_development_dependency 'ruby-debug19'
+  s.add_development_dependency 'autotest-standalone'
+  s.add_development_dependency 'autotest-fsevent' if RUBY_PLATFORM =~ /darwin/
 end
