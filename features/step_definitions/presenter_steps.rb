@@ -4,12 +4,12 @@ end
 
 Given "I have a Catwalk presenter class for my model" do
   klass = Class.new
-  klass.send :include, Catwalk
+  klass.send :include, Catwalk::Presenter
   @presenter = klass.new @model
 end
 
 When "I include Catwalk" do
-  @presenter_klass.send :include, Catwalk
+  @presenter_klass.send :include, Catwalk::Presenter
 end
 
 When "I setup my presenter to represent my model" do
