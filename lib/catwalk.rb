@@ -1,0 +1,3 @@
+module Catwalk
+  # Your code goes here...
+end
