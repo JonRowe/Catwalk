@@ -1,0 +1,3 @@
+default: --color --format pretty features
+autotest: --color --format pretty features
+autotest-all: --color --format pretty features
