@@ -70,5 +70,39 @@ module Catwalk
       end
       it { should == model_value }
     end
+
+    describe "field with default_when" do
+      let(:model_value) { "a value" }
+
+      before do
+        model.stub(:a_field).and_return(model_value)
+        model_value.stub(:method_is_true).and_return(false)
+      end
+
+      subject do
+        klass.class_eval do
+          field :a_field, default_when: :method_is_true
+        end
+        presenter.a_field
+      end
+
+      it "should proxy field to model" do
+        model.should_receive(:a_field).and_return(model_value)
+        subject
+      end
+      it "should check wether method passes on field" do
+        model_value.should_receive(:method_is_true).and_return false
+        subject
+      end
+      it { should == model_value }
+
+      context "where default_when check fails" do
+        before do
+          model_value.stub(:method_is_true).and_return(true)
+        end
+
+        it { should == "Not Set" }
+      end
+    end
   end
 end

@@ -18,9 +18,16 @@ module Catwalk
 
     module ClassMethods
 
-      def field(field_name)
+      def field(field_name,opts={})
         define_method field_name do
-          @model.send field_name
+          field_value = @model.send field_name
+          default_when = opts[:default_when]
+
+          if default_when && field_value.send(default_when)
+            "Not Set"
+          else
+            field_value
+          end
         end
       end
 
