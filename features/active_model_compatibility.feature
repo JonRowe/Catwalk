@@ -7,4 +7,5 @@ Feature: Active Model compatibility
     Given I have an ActiveModel based model
     And I have a presenter class
     When I include Catwalk
+    And I setup my presenter to represent my model
     Then my presenter should expose the models ActiveModel functionality
