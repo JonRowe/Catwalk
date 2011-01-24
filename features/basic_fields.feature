@@ -5,7 +5,7 @@ Feature: Presenting basic fields from an active model compatible model
 
   Scenario: Basic usage
     Given I have an ActiveModel based model
-    And my model has a attribute named "title"
+    And my model has an attribute named "title"
     And I have a Catwalk presenter class for my model
     When I define a field "title"
     Then my presenter should present "title" from my model
