@@ -25,6 +25,8 @@ module Catwalk
 
           if default_when && field_value.send(default_when)
             "Not Set"
+          elsif opts[:format_with] && opts[:format_with].respond_to?(:call)
+            opts[:format_with].call field_value
           else
             field_value
           end
