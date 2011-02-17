@@ -19,7 +19,7 @@ Feature: Presenting basic fields from an active model compatible model
         field :title
       end
       """
-    And I set it up to present my model
+    When I set up my presenter for my model
       """
       @model = MyActiveModel.new
       @presenter = MyModelPresenter.new @model

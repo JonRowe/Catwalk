@@ -3,8 +3,7 @@ Feature: Field with default_when specified
   As a developer
   I want to specify a check to be performed when I access a field
 
-  @default @field
-  Scenario: default_when specified
+  Background:
     Given I have an ActiveModel based model
       """
       class MyActiveModel < ActiveModelExample
@@ -19,7 +18,10 @@ Feature: Field with default_when specified
         field :title, default_when: :nil?
       end
       """
-    And I set it up to present my model
+
+  @default @field
+  Scenario: default_when specified
+    When I set up my presenter for my model
       """
       @model = MyActiveModel.new
       @model.title = 'a value'
@@ -28,9 +30,10 @@ Feature: Field with default_when specified
     Then my presenter should present "title" from my model
 
   Scenario: default_when specified, and criteria matched
-    Given I have an ActiveModel based model
-    And my model has an attribute named "title"
+    When I set up my presenter for my model
+      """
+      @model = MyActiveModel.new
+      @presenter = MyModelPresenter.new @model
+      """
     But my model's "title" attribute is nil
-    And I have a Catwalk presenter class for my model
-    When I define a field "title" with default_when: :nil?
     Then my presenter should present "title" as "Not Set"
