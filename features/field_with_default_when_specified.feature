@@ -29,6 +29,7 @@ Feature: Field with default_when specified
       """
     Then my presenter should present "title" from my model
 
+  @default @field @defaulted
   Scenario: default_when specified, and criteria matched
     When I set up my presenter for my model
       """
