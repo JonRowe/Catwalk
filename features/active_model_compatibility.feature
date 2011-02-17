@@ -3,9 +3,22 @@ Feature: Active Model compatibility
   As a developer
   I wish to use catwalk to present my models whilst adhering to ActiveModel::Lint
 
+  @basic @model @active-model
   Scenario: Basic Active Model functionality
     Given I have an ActiveModel based model
-    And I have a presenter class
-    When I include Catwalk
-    And I setup my presenter to represent my model
+      """
+      class MyActiveModel < ActiveModelExample
+      end
+      """
+    When I define a Catwalk presenter class for my model
+      """
+      class MyModelPresenter
+        include Catwalk::Presenter
+      end
+      """
+    When I set up my presenter for my model
+      """
+      @model = MyActiveModel.new
+      @presenter = MyModelPresenter.new @model
+      """
     Then my presenter should expose the models ActiveModel functionality
