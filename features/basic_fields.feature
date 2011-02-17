@@ -3,9 +3,25 @@ Feature: Presenting basic fields from an active model compatible model
   As a developer
   I want to wrap my models in a catwalk presenter
 
+  @basic @field
   Scenario: Basic usage
     Given I have an ActiveModel based model
-    And my model has an attribute named "title"
-    And I have a Catwalk presenter class for my model
-    When I define a field "title"
+      """
+      class MyActiveModel < ActiveModelExample
+        attr_accessor :title
+      end
+      """
+    When I define a Catwalk presenter class for my model
+      """
+      class MyModelPresenter
+        include Catwalk::Presenter
+
+        field :title
+      end
+      """
+    And I set it up to present my model
+      """
+      @model = MyActiveModel.new
+      @presenter = MyModelPresenter.new @model
+      """
     Then my presenter should present "title" from my model
