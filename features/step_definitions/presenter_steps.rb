@@ -1,25 +1,9 @@
-Given "I have a presenter class" do
-  @presenter_klass = Class.new
+When "I define a Catwalk presenter class for my model" do |code|
+  eval code
 end
 
-Given "I have a Catwalk presenter class for my model" do
-  klass = Class.new
-  klass.send :include, Catwalk::Presenter
-  @presenter = klass.new @model
-end
-
-When "I include Catwalk" do
-  @presenter_klass.send :include, Catwalk::Presenter
-end
-
-When "I setup my presenter to represent my model" do
-  @presenter = @presenter_klass.new(@model)
-end
-
-When /^I set access_as to "([^"]*)"$/ do |accessor|
-  @presenter.class.class_eval do
-    access_as accessor
-  end
+When "I set up my presenter for my model" do |code|
+  eval code
 end
 
 Then "my presenter should expose the models ActiveModel functionality" do
