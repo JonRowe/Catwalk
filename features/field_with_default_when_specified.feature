@@ -15,7 +15,7 @@ Feature: Field with default_when specified
       class MyModelPresenter
         include Catwalk::Presenter
 
-        field :title, default_when: :nil?
+        field :title, :default_when => :nil?
       end
       """
 

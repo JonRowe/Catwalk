@@ -16,7 +16,7 @@ Feature: Field with format block specified
       class MyModelPresenter
         include Catwalk::Presenter
 
-        field :title, format_with: lambda { |field| field.upcase }
+        field :title, :format_with => lambda { |field| field.upcase }
       end
       """
     When I set up my presenter for my model

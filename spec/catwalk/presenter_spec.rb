@@ -20,9 +20,9 @@ module Catwalk
     end
 
     describe "active model compliance" do
-      let(:model_name) { mock 'model_name', human: "Model Name", singular: "model_name", plural: "Model Names", partial_path: '/model' }
-      let(:active_model_errors) { mock "errors", full_messages: [], :[] => [] }
-      let(:model) { mock "model", to_key: {}, to_param: {}, valid?: true, persisted?: true, model_name: model_name, errors: active_model_errors }
+      let(:model_name) { mock 'model_name', :human => "Model Name", :singular => "model_name", :plural => "Model Names", :partial_path => '/model' }
+      let(:active_model_errors) { mock "errors", :full_messages => [], :[] => [] }
+      let(:model) { mock "model", :to_key => {}, :to_param => {}, :valid? => true, :persisted? => true, :model_name => model_name, :errors => active_model_errors }
 
       before do
         model_name.stub(:kind_of?).with(String).and_return(true)
@@ -30,12 +30,12 @@ module Catwalk
       subject { presenter }
 
       it_should_behave_like "ActiveModel"
-      it_should_behave_like "proxy active_model method", :to_key,     from: :model
-      it_should_behave_like "proxy active_model method", :to_param,   from: :model
-      it_should_behave_like "proxy active_model method", :valid?,     from: :model
-      it_should_behave_like "proxy active_model method", :persisted?, from: :model
-      it_should_behave_like "proxy active_model method", :model_name, from: :model
-      it_should_behave_like "proxy active_model method", :errors,     from: :model
+      it_should_behave_like "proxy active_model method", :to_key,     :from => :model
+      it_should_behave_like "proxy active_model method", :to_param,   :from => :model
+      it_should_behave_like "proxy active_model method", :valid?,     :from => :model
+      it_should_behave_like "proxy active_model method", :persisted?, :from => :model
+      it_should_behave_like "proxy active_model method", :model_name, :from => :model
+      it_should_behave_like "proxy active_model method", :errors,     :from => :model
       its(:to_model) { should == model }
     end
 
@@ -77,7 +77,7 @@ module Catwalk
 
         subject do
           klass.class_eval do
-            field :a_field, default_when: :method_is_true
+            field :a_field, :default_when => :method_is_true
           end
           presenter.a_field
         end
@@ -104,7 +104,7 @@ module Catwalk
 
         subject do
           klass.class_eval do
-            field :a_field, format_with: lambda { |field| field.my_format_method }
+            field :a_field, :format_with => lambda { |field| field.my_format_method }
           end
           presenter.a_field
         end
