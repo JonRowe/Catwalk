@@ -17,11 +17,10 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
+  s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'cucumber'
-  s.add_development_dependency 'ruby-debug19'
   s.add_development_dependency 'autotest-standalone'
-  s.add_development_dependency 'autotest-fsevent' if RUBY_PLATFORM =~ /darwin/
 
   s.add_development_dependency 'activemodel'
 end
