@@ -22,5 +22,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'cucumber'
   s.add_development_dependency 'autotest-standalone'
 
-  s.add_development_dependency 'activemodel', '>= 3.2'
+  if RUBY_VERSION.to_f == 1.8
+    s.add_development_dependency 'activemodel', '~> 3.2'
+  else
+    s.add_development_dependency 'activemodel'
+  end
 end
