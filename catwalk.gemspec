@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'cucumber'
   s.add_development_dependency 'autotest-standalone'
 
-  s.add_development_dependency 'activemodel'
+  s.add_development_dependency 'activemodel', '>= 3.2'
 end
