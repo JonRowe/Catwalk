@@ -1,5 +1,5 @@
-[![Build Status](https://secure.travis-ci.org/JonRowe/Catwalk.png)](http://travis-ci.org/JonRowe/Catwalk)
 # Catwalk
+[![Build Status](https://secure.travis-ci.org/JonRowe/Catwalk.png)](http://travis-ci.org/JonRowe/Catwalk) [![Code Climate](https://codeclimate.com/github/JonRowe/Catwalk.png)](https://codeclimate.com/github/JonRowe/Catwalk)
 
 Presenter gem library. See features for use.
 
