@@ -8,9 +8,10 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jon Rowe"]
   s.email       = ["hello@jonrowe.co.uk"]
-  s.homepage    = "http://github.com/jonrowe/catwalk"
+  s.homepage    = "http://github.com/JonRowe/catwalk"
   s.summary     = %q{Catwalk is a gem for showing off models. It allows you to seperate presentation logic from data models.}
   s.description = %q{Catwalk is a gem for showing off models. It allows you to seperate presentation logic from data models.}
+  s.license     = "MIT"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {spec,features}/* .autotest`.split("\n")
