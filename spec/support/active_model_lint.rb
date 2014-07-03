@@ -31,7 +31,7 @@ shared_examples_for "ActiveModel" do
     expect(presenter.errors.full_messages).to be_a Array
   end
 
-  it "should have blank arrays for keys" do
+  it "has blank arrays for keys" do
     expect(presenter.errors[:hello]).to eq []
   end
 

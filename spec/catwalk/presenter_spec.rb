@@ -12,7 +12,7 @@ module Catwalk
     end
 
     describe "initialization" do
-      it "should assign an the model to an instance variable accessible via to_model" do
+      it "assigns an the model to an instance variable accessible via to_model" do
         expect(presenter.to_model).to eq model
       end
     end
@@ -26,13 +26,13 @@ module Catwalk
         allow(model_name).to receive(:kind_of?).with(String).and_return(true)
       end
 
-      it_should_behave_like "ActiveModel"
-      it_should_behave_like "proxy active_model method", :to_key,     :from => :model
-      it_should_behave_like "proxy active_model method", :to_param,   :from => :model
-      it_should_behave_like "proxy active_model method", :valid?,     :from => :model
-      it_should_behave_like "proxy active_model method", :persisted?, :from => :model
-      it_should_behave_like "proxy active_model method", :model_name, :from => :model
-      it_should_behave_like "proxy active_model method", :errors,     :from => :model
+      it_behaves_like "ActiveModel"
+      it_behaves_like "proxy active_model method", :to_key,     :from => :model
+      it_behaves_like "proxy active_model method", :to_param,   :from => :model
+      it_behaves_like "proxy active_model method", :valid?,     :from => :model
+      it_behaves_like "proxy active_model method", :persisted?, :from => :model
+      it_behaves_like "proxy active_model method", :model_name, :from => :model
+      it_behaves_like "proxy active_model method", :errors,     :from => :model
 
       it "converts to model" do
         expect(presenter.to_model).to eq model
@@ -58,7 +58,7 @@ module Catwalk
         end
       end
 
-      it "should proxy field to model" do
+      it "proxies field to model" do
         expect(model).to receive(:a_field) { model_value }
         expect(presenter.a_field).to eq model_value
       end
@@ -71,7 +71,7 @@ module Catwalk
           end
         end
 
-        it "should check wether method passes on field" do
+        it "checks wether method passes on field" do
           expect(model_value).to receive(:method_is_true) { false }
           presenter.a_field
         end
@@ -95,7 +95,7 @@ module Catwalk
           end
         end
 
-        it "should format the field with the block" do
+        it "formats the field with the block" do
           expect(model_value).to receive(:my_format_method) { formatted_value }
           expect(presenter.a_field).to eq formatted_value
         end
