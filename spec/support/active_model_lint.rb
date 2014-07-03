@@ -3,31 +3,50 @@
 
 shared_examples_for "ActiveModel" do
 
-  it { is_expected.to respond_to :to_key }
-  it { is_expected.to respond_to :to_param }
-  it { is_expected.to respond_to :valid? }
-  it { is_expected.to respond_to :persisted? }
-  it { is_expected.to respond_to :model_name }
-  it { is_expected.to respond_to :errors }
-  it { is_expected.to respond_to :to_model }
+  it { expect(presenter).to respond_to :to_key }
+  it { expect(presenter).to respond_to :to_param }
+  it { expect(presenter).to respond_to :valid? }
+  it { expect(presenter).to respond_to :persisted? }
+  it { expect(presenter).to respond_to :model_name }
+  it { expect(presenter).to respond_to :errors }
+  it { expect(presenter).to respond_to :to_model }
 
-  its(:"model_name")              { should be_a String }
-  its(:"model_name.human")        { should be_a String }
-  its(:"model_name.partial_path") { should be_a String }
-  its(:"model_name.singular")     { should be_a String }
-  its(:"model_name.plural")       { should be_a String }
+  it "has a model_name" do
+    expect(presenter.model_name).to be_a String
+  end
+  it "has a model_name.human" do
+    expect(presenter.model_name.human).to be_a String
+  end
+  it "has a model_name.partial_path" do
+    expect(presenter.model_name.partial_path).to be_a String
+  end
+  it "has a model_name.singular" do
+    expect(presenter.model_name.singular).to be_a String
+  end
+  it "has a model_name.plural" do
+    expect(presenter.model_name.plural).to be_a String
+  end
 
-  its(:"errors.full_messages") { should be_a Array }
+  it "has errors.full_messages" do
+    expect(presenter.errors.full_messages).to be_a Array
+  end
+
   it "should have blank arrays for keys" do
-    expect(subject.errors[:hello]).to eq []
+    expect(presenter.errors[:hello]).to eq []
   end
 
   context "where not persisted" do
     before do
-      allow(subject).to receive(:persisted?) { false }
+      allow(presenter).to receive(:persisted?) { false }
     end
 
-    its(:to_key)   { should be_nil }
-    its(:to_param) { should be_nil }
+    it "has a nil to_key" do
+      expect(presenter.to_key).to eq nil
+    end
+
+    it "has a nil to_param" do
+      expect(presenter.to_param).to eq nil
+    end
+
   end
 end

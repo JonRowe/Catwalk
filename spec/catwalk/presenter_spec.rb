@@ -5,7 +5,7 @@ module Catwalk
 
     let(:model) { double "model" }
     let(:klass) { Class.new }
-    subject(:presenter) { klass.new(model) }
+    let(:presenter) { klass.new(model) }
 
     before do
       klass.class_eval { include Catwalk::Presenter }
