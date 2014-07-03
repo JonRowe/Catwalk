@@ -3,7 +3,7 @@ require 'spec_helper'
 module Catwalk
   describe Presenter do
 
-    let(:model) { mock "model" }
+    let(:model) { double "model" }
     let(:klass) { Class.new }
     let(:presenter) { klass.new(model) }
 
@@ -12,108 +12,93 @@ module Catwalk
     end
 
     describe "initialization" do
-      subject { presenter }
-
-      it "should assign an the model to an instance variable accessible via to_model" do
-        subject.to_model.should == model
+      it "assigns an the model to an instance variable accessible via to_model" do
+        expect(presenter.to_model).to eq model
       end
     end
 
     describe "active model compliance" do
-      let(:model_name) { mock 'model_name', :human => "Model Name", :singular => "model_name", :plural => "Model Names", :partial_path => '/model' }
-      let(:active_model_errors) { mock "errors", :full_messages => [], :[] => [] }
-      let(:model) { mock "model", :to_key => {}, :to_param => {}, :valid? => true, :persisted? => true, :model_name => model_name, :errors => active_model_errors }
+      let(:model_name) { double 'model_name', :human => "Model Name", :singular => "model_name", :plural => "Model Names", :partial_path => '/model' }
+      let(:active_model_errors) { double "errors", :full_messages => [], :[] => [] }
+      let(:model) { double "model", :to_key => {}, :to_param => {}, :valid? => true, :persisted? => true, :model_name => model_name, :errors => active_model_errors }
 
       before do
-        model_name.stub(:kind_of?).with(String).and_return(true)
+        allow(model_name).to receive(:kind_of?).with(String).and_return(true)
       end
-      subject { presenter }
 
-      it_should_behave_like "ActiveModel"
-      it_should_behave_like "proxy active_model method", :to_key,     :from => :model
-      it_should_behave_like "proxy active_model method", :to_param,   :from => :model
-      it_should_behave_like "proxy active_model method", :valid?,     :from => :model
-      it_should_behave_like "proxy active_model method", :persisted?, :from => :model
-      it_should_behave_like "proxy active_model method", :model_name, :from => :model
-      it_should_behave_like "proxy active_model method", :errors,     :from => :model
-      its(:to_model) { should == model }
+      it_behaves_like "ActiveModel"
+      it_behaves_like "proxy active_model method", :to_key,     :from => :model
+      it_behaves_like "proxy active_model method", :to_param,   :from => :model
+      it_behaves_like "proxy active_model method", :valid?,     :from => :model
+      it_behaves_like "proxy active_model method", :persisted?, :from => :model
+      it_behaves_like "proxy active_model method", :model_name, :from => :model
+      it_behaves_like "proxy active_model method", :errors,     :from => :model
+
+      it "converts to model" do
+        expect(presenter.to_model).to eq model
+      end
     end
 
     describe "access_as" do
-      subject do
+      it "adds an accessors with the specified name" do
         klass.class_eval do
           access_as :model_accessor
         end
-        presenter
+        expect(presenter.model_accessor).to eq model
       end
-
-      its(:model_accessor) { should == model }
     end
 
     describe "field" do
       let(:model_value) { "a value" }
 
       before do
-        model.stub(:a_field).and_return(model_value)
-      end
-
-      subject do
+        allow(model).to receive(:a_field) { model_value }
         klass.class_eval do
           field :a_field
         end
-        presenter.a_field
       end
 
-      it "should proxy field to model" do
-        model.should_receive(:a_field).and_return(model_value)
-        subject
+      it "proxies field to model" do
+        expect(model).to receive(:a_field) { model_value }
+        expect(presenter.a_field).to eq model_value
       end
-      it { should == model_value }
 
       context "when default_when is specified" do
         before do
-          model_value.stub(:method_is_true).and_return(false)
-        end
-
-        subject do
+          allow(model_value).to receive(:method_is_true) { false }
           klass.class_eval do
             field :a_field, :default_when => :method_is_true
           end
-          presenter.a_field
         end
 
-        it "should check wether method passes on field" do
-          model_value.should_receive(:method_is_true).and_return false
-          subject
+        it "checks wether method passes on field" do
+          expect(model_value).to receive(:method_is_true) { false }
+          presenter.a_field
         end
 
         context "and default_when check fails" do
           before do
-            model_value.stub(:method_is_true).and_return true
+            allow(model_value).to receive(:method_is_true) { true }
           end
 
-          it { should == "Not Set" }
+          specify { expect(presenter.a_field).to eq "Not Set" }
         end
       end
+
       context "when format_with block is specified" do
         let(:formatted_value) { "nicer value" }
 
         before do
-          model_value.stub(:my_format_method).and_return formatted_value
-        end
-
-        subject do
+          allow(model_value).to receive(:my_format_method) { formatted_value }
           klass.class_eval do
             field :a_field, :format_with => lambda { |field| field.my_format_method }
           end
-          presenter.a_field
         end
 
-        it "should format the field with the block" do
-          model_value.should_receive(:my_format_method).and_return formatted_value
-          subject
+        it "formats the field with the block" do
+          expect(model_value).to receive(:my_format_method) { formatted_value }
+          expect(presenter.a_field).to eq formatted_value
         end
-        it { should == formatted_value }
       end
     end
   end
