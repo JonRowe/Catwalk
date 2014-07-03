@@ -3,13 +3,13 @@
 
 shared_examples_for "ActiveModel" do
 
-  it { should respond_to :to_key }
-  it { should respond_to :to_param }
-  it { should respond_to :valid? }
-  it { should respond_to :persisted? }
-  it { should respond_to :model_name }
-  it { should respond_to :errors }
-  it { should respond_to :to_model }
+  it { is_expected.to respond_to :to_key }
+  it { is_expected.to respond_to :to_param }
+  it { is_expected.to respond_to :valid? }
+  it { is_expected.to respond_to :persisted? }
+  it { is_expected.to respond_to :model_name }
+  it { is_expected.to respond_to :errors }
+  it { is_expected.to respond_to :to_model }
 
   its(:"model_name")              { should be_a String }
   its(:"model_name.human")        { should be_a String }
@@ -19,12 +19,12 @@ shared_examples_for "ActiveModel" do
 
   its(:"errors.full_messages") { should be_a Array }
   it "should have blank arrays for keys" do
-    subject.errors[:hello].should == []
+    expect(subject.errors[:hello]).to eq []
   end
 
   context "where not persisted" do
     before do
-      subject.stub(:persisted?).and_return(false)
+      allow(subject).to receive(:persisted?) { false }
     end
 
     its(:to_key)   { should be_nil }
