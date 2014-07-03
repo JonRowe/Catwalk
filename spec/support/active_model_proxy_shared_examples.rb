@@ -1,6 +1,6 @@
 shared_examples_for "proxy active_model method" do |method,opts|
 	let(:target) { send opts[:from] }
-	let(:target_value) { mock "value" }
+	let(:target_value) { double "value" }
 
 	before do
 		target.stub(method).and_return(target_value)

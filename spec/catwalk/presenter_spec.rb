@@ -3,7 +3,7 @@ require 'spec_helper'
 module Catwalk
   describe Presenter do
 
-    let(:model) { mock "model" }
+    let(:model) { double "model" }
     let(:klass) { Class.new }
     let(:presenter) { klass.new(model) }
 
@@ -20,9 +20,9 @@ module Catwalk
     end
 
     describe "active model compliance" do
-      let(:model_name) { mock 'model_name', :human => "Model Name", :singular => "model_name", :plural => "Model Names", :partial_path => '/model' }
-      let(:active_model_errors) { mock "errors", :full_messages => [], :[] => [] }
-      let(:model) { mock "model", :to_key => {}, :to_param => {}, :valid? => true, :persisted? => true, :model_name => model_name, :errors => active_model_errors }
+      let(:model_name) { double 'model_name', :human => "Model Name", :singular => "model_name", :plural => "Model Names", :partial_path => '/model' }
+      let(:active_model_errors) { double "errors", :full_messages => [], :[] => [] }
+      let(:model) { double "model", :to_key => {}, :to_param => {}, :valid? => true, :persisted? => true, :model_name => model_name, :errors => active_model_errors }
 
       before do
         model_name.stub(:kind_of?).with(String).and_return(true)
