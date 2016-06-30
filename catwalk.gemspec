@@ -24,13 +24,14 @@ Gem::Specification.new do |s|
     s.add_development_dependency "rake", '~> 10.0'
   end
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'cucumber'
   s.add_development_dependency 'autotest-standalone'
 
   if RUBY_VERSION.to_f == 1.8 || RUBY_VERSION == '1.9.2'
     s.add_development_dependency 'activemodel', '~> 3.2'
     s.add_development_dependency 'i18n', '<= 0.6.11'
+    s.add_development_dependency 'cucumber', '< 2.0.0'
   else
     s.add_development_dependency 'activemodel'
+    s.add_development_dependency 'cucumber'
   end
 end
