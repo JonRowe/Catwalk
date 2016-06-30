@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
 
   if RUBY_VERSION.to_f == 1.8 || RUBY_VERSION == '1.9.2'
     s.add_development_dependency 'activemodel', '~> 3.2'
+    s.add_development_dependency 'i18n', '<= 0.6.11'
   else
     s.add_development_dependency 'activemodel'
   end
