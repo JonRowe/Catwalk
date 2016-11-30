@@ -31,7 +31,11 @@ Gem::Specification.new do |s|
     s.add_development_dependency 'i18n', '<= 0.6.11'
     s.add_development_dependency 'cucumber', '< 2.0.0'
   else
-    s.add_development_dependency 'activemodel'
+    if RUBY_VERSION < '2.2.2'
+      s.add_development_dependency 'activemodel', '< 5'
+    else
+      s.add_development_dependency 'activemodel'
+    end
     s.add_development_dependency 'cucumber'
   end
 end
